@@ -21,7 +21,7 @@
 
 #include <memory>
 #include <string>
-#include <fluxions_opengl.hpp>
+#include <viperfish_opengl.hpp>
 #include <viperfish_widget.hpp>
 #include <imgui.h>
 

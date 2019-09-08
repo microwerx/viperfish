@@ -73,7 +73,7 @@ namespace Viperfish
 		inline SharedPtr operator[](size_t _Pos) noexcept { if (leaf_) return SharedPtr(nullptr); return children_.at(_Pos); }
 		inline const SharedPtr operator[](size_t _Pos) const noexcept { if (leaf_) return SharedPtr(nullptr); return children_.at(_Pos); }
 		inline iterator begin() noexcept { if (leaf_) return children_.end(); return children_.begin(); }
-		inline const_iterator begin() const noexcept { if (leaf_) return children_.end(); }
+		inline const_iterator begin() const noexcept { if (leaf_) return children_.end(); return children_.begin(); }
 		inline iterator end() noexcept { return children_.end(); }
 		inline const_iterator end() const noexcept { return children_.end(); }
 		inline const_iterator cbegin() const noexcept { if (leaf_) return children_.cend(); return children_.cbegin(); }
