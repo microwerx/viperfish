@@ -21,8 +21,6 @@
 
 #include <chrono>
 
-#include <viperfish_stopwatch.hpp>
-
 namespace Viperfish
 {
 
