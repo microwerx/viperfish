@@ -1,4 +1,4 @@
-INCLUDE_LIBRARIES = glfw
+INCLUDE_LIBRARIES = 
 INCLUDE_PROJECTS = hatchetfish fluxions-deps fluxions-gte
 INCLUDEDIRS = $(patsubst %,-I../%/include,$(INCLUDE_PROJECTS))
 LIBDIRS = $(patsubst %,-L../%/,$(INCLUDE_PROJECTS))
