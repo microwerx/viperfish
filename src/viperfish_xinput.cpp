@@ -16,7 +16,6 @@
 // along with this program.If not, see <https://www.gnu.org/licenses/>.
 //
 // For any other type of licensing, please contact me at jmetzgar@outlook.com
-#include "pch.h"
 
 #ifdef WIN32
 #ifndef WIN32_LEAN_AND_MEAN

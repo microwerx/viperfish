@@ -16,7 +16,7 @@
 // along with this program.If not, see <https://www.gnu.org/licenses/>.
 //
 // For any other type of licensing, please contact me at jmetzgar@outlook.com
-#include "pch.h"
+#include <string>
 #include <viperfish_keyboard.hpp>
 
 namespace Viperfish
@@ -91,11 +91,11 @@ namespace Viperfish
 
 		int keymod = GetKeyboardModifiers();
 		if (keymod & VF_SHIFT_MODIFIER) {
-			char *lowers = "`1234567890-=[]\\;',./";
-			char *uppers = "~!@#$%^&*()_+{}|:\"<>?";
+			const char *lowers = "`1234567890-=[]\\;',./";
+			const char *uppers = "~!@#$%^&*()_+{}|:\"<>?";
 			c = (char)toupper(c);
-			char *lc = lowers;
-			char *uc = uppers;
+			const char *lc = lowers;
+			const char *uc = uppers;
 			while (*lc != 0) {
 				if (c == *lc) {
 					c = *uc;
@@ -127,59 +127,59 @@ namespace Viperfish
 		if (key.front() <= 0x7f)
 			return tolower(key.front());
 		if (key == "F1")
-			return 0x100 + GLUT_KEY_F1;
+			return VF_KEY_F1;
 		if (key == "F2")
-			return 0x100 + GLUT_KEY_F2;
+			return VF_KEY_F2;
 		if (key == "F3")
-			return 0x100 + GLUT_KEY_F3;
+			return VF_KEY_F3;
 		if (key == "F4")
-			return 0x100 + GLUT_KEY_F4;
+			return VF_KEY_F4;
 		if (key == "F5")
-			return 0x100 + GLUT_KEY_F5;
+			return VF_KEY_F5;
 		if (key == "F6")
-			return 0x100 + GLUT_KEY_F6;
+			return VF_KEY_F6;
 		if (key == "F7")
-			return 0x100 + GLUT_KEY_F7;
+			return VF_KEY_F7;
 		if (key == "F8")
-			return 0x100 + GLUT_KEY_F8;
+			return VF_KEY_F8;
 		if (key == "F9")
-			return 0x100 + GLUT_KEY_F9;
+			return VF_KEY_F9;
 		if (key == "F10")
-			return 0x100 + GLUT_KEY_F10;
+			return VF_KEY_F10;
 		if (key == "F11")
-			return 0x100 + GLUT_KEY_F11;
+			return VF_KEY_F11;
 		if (key == "F12")
-			return 0x100 + GLUT_KEY_F12;
+			return VF_KEY_F12;
 		if (key == "Left")
-			return 0x100 + GLUT_KEY_LEFT;
+			return VF_KEY_LEFT;
 		if (key == "Up")
-			return 0x100 + GLUT_KEY_UP;
+			return VF_KEY_UP;
 		if (key == "Right")
-			return 0x100 + GLUT_KEY_RIGHT;
+			return VF_KEY_RIGHT;
 		if (key == "Down")
-			return 0x100 + GLUT_KEY_DOWN;
+			return VF_KEY_DOWN;
 		if (key == "PageUp")
-			return 0x100 + GLUT_KEY_PAGE_UP;
+			return VF_KEY_PAGE_UP;
 		if (key == "PageDown")
-			return 0x100 + GLUT_KEY_PAGE_DOWN;
+			return VF_KEY_PAGE_DOWN;
 		if (key == "Home")
-			return 0x100 + GLUT_KEY_HOME;
+			return VF_KEY_HOME;
 		if (key == "End")
-			return 0x100 + GLUT_KEY_END;
+			return VF_KEY_END;
 		if (key == "Insert")
-			return 0x100 + GLUT_KEY_INSERT;
+			return VF_KEY_INSERT;
 		if (key == "NumLock")
-			return 0x100 + GLUT_KEY_NUM_LOCK;
+			return VF_KEY_NUM_LOCK;
 		if (key == "Begin")
-			return 0x100 + GLUT_KEY_BEGIN;
+			return VF_KEY_BEGIN;
 		if (key == "Delete")
-			return 0x100 + GLUT_KEY_DELETE;
+			return VF_KEY_DELETE;
 		if (key == "Shift")
-			return 0x100 + GLUT_KEY_SHIFT_L;
+			return VF_KEY_SHIFT_L;
 		if (key == "Ctrl")
-			return 0x100 + GLUT_KEY_CTRL_L;
+			return VF_KEY_CTRL_L;
 		if (key == "Alt")
-			return 0x100 + GLUT_KEY_ALT_L;
+			return VF_KEY_ALT_L;
 		return 0;
 	}
 

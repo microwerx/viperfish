@@ -17,6 +17,7 @@
 //
 // For any other type of licensing, please contact me at jmetzgar@outlook.com
 #include <viperfish_dear_imgui.hpp>
+#include <fluxions_fileio.hpp>
 
 namespace Viperfish
 {

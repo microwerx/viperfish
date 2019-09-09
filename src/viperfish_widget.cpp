@@ -16,7 +16,6 @@
 // along with this program.If not, see <https://www.gnu.org/licenses/>.
 //
 // For any other type of licensing, please contact me at jmetzgar@outlook.com
-#include "pch.h"
 #include <viperfish.hpp>
 #include <viperfish_gamepad.hpp>
 
@@ -202,6 +201,7 @@ namespace Viperfish
 
 	bool Widget::processStyle(const std::string &style)
 	{
+		/*
 		using namespace KASL;
 		JSONPtr json = JSON::MakeNull();
 		if (!json->Deserialize(style))
@@ -238,6 +238,7 @@ namespace Viperfish
 		}
 
 		style_ = jsonStyle_->Serialize();
+		*/
 		return true;
 	}
 
