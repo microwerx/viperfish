@@ -1,4 +1,4 @@
-// SSPHH/Fluxions/Unicornfish/Viperfish/Hatchetfish/Sunfish/KASL/GLUT Extensions
+// SSPHH/Fluxions/Unicornfish/Viperfish/Hatchetfish/Sunfish/Damselfish/GLUT Extensions
 // Copyright (C) 2017 Jonathan Metzgar
 // All rights reserved.
 //
@@ -202,7 +202,7 @@ namespace Viperfish
 	bool Widget::processStyle(const std::string &style)
 	{
 		/*
-		using namespace KASL;
+		using namespace Df;
 		JSONPtr json = JSON::MakeNull();
 		if (!json->Deserialize(style))
 			return false;

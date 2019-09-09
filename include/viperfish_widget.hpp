@@ -1,4 +1,4 @@
-// SSPHH/Fluxions/Unicornfish/Viperfish/Hatchetfish/Sunfish/KASL/GLUT Extensions
+// SSPHH/Fluxions/Unicornfish/Viperfish/Hatchetfish/Sunfish/Damselfish/GLUT Extensions
 // Copyright (C) 2017 Jonathan Metzgar
 // All rights reserved.
 //
@@ -115,9 +115,9 @@ namespace Viperfish
 		inline const std::string &caption() const noexcept { return caption_; }
 		inline std::string &caption() noexcept { return caption_; }
 		inline const std::string &style() const noexcept { return style_; }
-		// inline const KASL::JSONPtr jsonStyle() const noexcept { return jsonStyle_; }
-		// inline KASL::JSONPtr jsonStyle() noexcept { return jsonStyle_; }
-		// inline KASL::JSONPtr setStyle(const std::string &style) noexcept { processStyle(style); return jsonStyle_; }
+		// inline const Df::JSONPtr jsonStyle() const noexcept { return jsonStyle_; }
+		// inline Df::JSONPtr jsonStyle() noexcept { return jsonStyle_; }
+		// inline Df::JSONPtr setStyle(const std::string &style) noexcept { processStyle(style); return jsonStyle_; }
 
 		virtual void OnInit(const std::vector<std::string> &args);
 		virtual void OnKill();
@@ -195,7 +195,7 @@ namespace Viperfish
 		GamepadState kbgamepad;
 		KeyboardState keyboard;
 		MouseState mouse;
-		// KASL::JSONPtr jsonStyle_;
+		// Df::JSONPtr jsonStyle_;
 		std::string style_;
 		std::string caption_;
 		void makeLeaf(bool state) { leaf_ = state; }
