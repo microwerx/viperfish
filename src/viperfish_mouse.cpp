@@ -18,7 +18,7 @@
 // For any other type of licensing, please contact me at jmetzgar@outlook.com
 #include <viperfish_mouse.hpp>
 
-namespace Viperfish {
+namespace Vf {
 // @class MouseDragState
 
 void MouseDragState::Start(int whichButton, Vector2i newPosition, double currentTime)

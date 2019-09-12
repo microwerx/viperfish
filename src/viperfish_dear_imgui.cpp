@@ -19,7 +19,13 @@
 #include <viperfish_dear_imgui.hpp>
 #include <fluxions_fileio.hpp>
 
-namespace Viperfish
+#pragma comment(lib, "glew32.lib")
+#pragma comment(lib, "hatchetfish.lib")
+#pragma comment(lib, "fluxions-gte.lib")
+#pragma comment(lib, "fluxions-deps.lib")
+#pragma comment(lib, "opengl32.lib")
+
+namespace Vf
 {
 	DearImGuiWidget::DearImGuiWidget()
 		: Widget("imguiwidget")
@@ -42,7 +48,7 @@ namespace Viperfish
 	{
 		Widget::OnInit(args);
 
-		hflog.infofn(__FUNCTION__, "Creating Dear ImGui Context");
+		Hf::Log.infofn(__FUNCTION__, "Creating Dear ImGui Context");
 		pImGuiContext = ImGui::CreateContext();
 		pIO = &ImGui::GetIO();
 		pIO->DisplaySize.x = 640.0f;
@@ -84,7 +90,7 @@ namespace Viperfish
 	void DearImGuiWidget::OnKill()
 	{
 		InvalidateDeviceObjects();
-		hflog.infofn(__FUNCTION__, "Destroying Dear ImGui Context");
+		Hf::Log.infofn(__FUNCTION__, "Destroying Dear ImGui Context");
 		ImGui::DestroyContext(pImGuiContext);
 		pIO = nullptr;
 		pImGuiContext = nullptr;
@@ -303,7 +309,7 @@ namespace Viperfish
 			char *infoLog = new char[infoLogLength + 1];
 			infoLog[infoLogLength] = '\0';
 			glGetProgramInfoLog(program, infoLogLength, NULL, infoLog);
-			hflog.error("%s(): failed to link Dear ImGui program\n%s\n", infoLog);
+			Hf::Log.error("%s(): failed to link Dear ImGui program\n%s\n", infoLog);
 			delete[] infoLog;
 		}
 
@@ -370,7 +376,7 @@ namespace Viperfish
 			ImGui::GetIO().Fonts->TexID = 0;
 			fontTextureId = 0;
 		}
-		hflog.infofn(__FUNCTION__, "Dear ImGui Device Objects Invalidated");
+		Hf::Log.infofn(__FUNCTION__, "Dear ImGui Device Objects Invalidated");
 	}
 
 	void DearImGuiWidget::RenderDrawLists()
@@ -498,4 +504,4 @@ namespace Viperfish
 		glViewport(last_viewport[0], last_viewport[1], (GLsizei)last_viewport[2], (GLsizei)last_viewport[3]);
 		glScissor(last_scissor_box[0], last_scissor_box[1], (GLsizei)last_scissor_box[2], (GLsizei)last_scissor_box[3]);
 	}
-} // namespace Viperfish
+} // namespace Vf

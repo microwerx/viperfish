@@ -18,7 +18,7 @@
 // For any other type of licensing, please contact me at jmetzgar@outlook.com
 #include <viperfish_widget.hpp>
 
-namespace Viperfish {
+namespace Vf {
 AnalogBitset::AnalogBitset()
 {
     std::fill_n(fbits, 32, 0.0f);

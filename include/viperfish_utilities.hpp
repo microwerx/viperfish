@@ -21,7 +21,7 @@
 
 #include <chrono>
 
-namespace Viperfish
+namespace Vf
 {
 
 // Time stuff
@@ -36,6 +36,6 @@ inline time_t SystemClockNow() noexcept
 	std::chrono::time_point<std::chrono::system_clock> tp = std::chrono::system_clock::now();
 	return std::chrono::system_clock::to_time_t(tp);
 }
-} // namespace Viperfish
+} // namespace Vf
 
 #endif

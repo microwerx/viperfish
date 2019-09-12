@@ -39,7 +39,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -69,7 +69,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)..\libs\include;$(ProjectDir)..\fluxions-deps\include;$(ProjectDir)..\hatchetfish\include;$(ProjectDir)..\fluxions-gte\include;$(ProjectDir)include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(SolutionDir)$(Platform)\$(Configuration)\;$(ProjectDir)..\libs\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir)..\libs\include;$(ProjectDir)..\fluxions-deps\include;$(ProjectDir)..\hatchetfish\include;$(ProjectDir)..\fluxions-gte\include;$(ProjectDir)include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(SolutionDir)$(Platform)\$(Configuration)\;$(ProjectDir)..\libs\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -123,6 +130,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\viperfish.hpp" />
+    <ClInclude Include="include\viperfish_dear_imgui.hpp" />
+    <ClInclude Include="include\viperfish_gamepad.hpp" />
+    <ClInclude Include="include\viperfish_keyboard.hpp" />
+    <ClInclude Include="include\viperfish_mouse.hpp" />
+    <ClInclude Include="include\viperfish_opengl.hpp" />
+    <ClInclude Include="include\viperfish_utilities.hpp" />
+    <ClInclude Include="include\viperfish_widget.hpp" />
+    <ClInclude Include="include\viperfish_xinput.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\viperfish_analog_bitset.cpp" />
+    <ClCompile Include="src\viperfish_dear_imgui.cpp" />
+    <ClCompile Include="src\viperfish_gamepad.cpp" />
+    <ClCompile Include="src\viperfish_keyboard.cpp" />
+    <ClCompile Include="src\viperfish_mouse.cpp" />
+    <ClCompile Include="src\viperfish_widget.cpp" />
+    <ClCompile Include="src\viperfish_xinput.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

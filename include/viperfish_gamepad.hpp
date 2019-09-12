@@ -21,7 +21,7 @@
 
 #include <map>
 
-namespace Viperfish
+namespace Vf
 {
 
 class AnalogBitset
@@ -216,6 +216,6 @@ class GamepadState
 	std::string hexRepresentation_;
 	std::string binRepresentation_;
 };
-} // namespace Viperfish
+} // namespace Vf
 
 #endif

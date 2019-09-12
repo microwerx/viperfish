@@ -28,7 +28,7 @@
 
 #pragma comment(lib, "xinput.lib")
 
-namespace Viperfish
+namespace Vf
 {
 class XInputGamepadState : public GamepadState
 {
@@ -52,7 +52,7 @@ class XInputGamepadState : public GamepadState
 	XINPUT_STATE gamepadState;
 	XINPUT_VIBRATION vibrationState;
 };
-} // namespace Viperfish
+} // namespace Vf
 
 #endif // WIN32
 

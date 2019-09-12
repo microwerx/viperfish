@@ -25,7 +25,7 @@
 #include <viperfish_widget.hpp>
 #include <imgui.h>
 
-namespace Viperfish
+namespace Vf
 {
 	class DearImGuiWidget : public Widget
 	{
@@ -78,6 +78,6 @@ namespace Viperfish
 		void InvalidateDeviceObjects();
 		void RenderDrawLists();
 	};
-} // namespace Viperfish
+} // namespace Vf
 
 #endif // VIPERFISH_IMGUI_HPP

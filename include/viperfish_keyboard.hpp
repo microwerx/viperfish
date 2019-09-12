@@ -82,7 +82,7 @@
 #define VF_KEY_KP_ENTER					0x155
 #define VF_KEY_KP_EQUAL					0x156
 
-namespace Viperfish
+namespace Vf
 {
 
 	struct KeyboardState
@@ -145,6 +145,6 @@ namespace Viperfish
 	const char *SpecialKeyToHTML5Name(int key);
 	int HTML5NameToKey(const std::string &key);
 
-} // namespace Viperfish
+} // namespace Vf
 
 #endif

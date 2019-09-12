@@ -23,7 +23,7 @@
 #include <fluxions_gte.hpp>
 #include <viperfish_utilities.hpp>
 
-namespace Viperfish
+namespace Vf
 {
 using namespace Fluxions;
 
@@ -86,6 +86,6 @@ struct MouseState
     void OnClick(const MouseClickState &mcs);
     void OnDoubleClick(const MouseDoubleClickState &mdcs);
 };
-} // namespace Viperfish
+} // namespace Vf
 
 #endif

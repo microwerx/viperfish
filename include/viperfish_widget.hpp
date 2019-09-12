@@ -29,7 +29,7 @@
 //#include <kasl_json.hpp>
 #include <hatchetfish.hpp>
 
-namespace Viperfish
+namespace Vf
 {
 	// Use the decorator pattern
 	class Widget : public std::enable_shared_from_this<Widget>
@@ -203,6 +203,6 @@ namespace Viperfish
 		const double getT0() const { return t0; }
 		const double getT1() const { return t1; }
 	};
-} // namespace Viperfish
+} // namespace Vf
 
 #endif

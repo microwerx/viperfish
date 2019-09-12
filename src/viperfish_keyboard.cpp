@@ -19,7 +19,7 @@
 #include <string>
 #include <viperfish_keyboard.hpp>
 
-namespace Viperfish
+namespace Vf
 {
 	static int vf_keymod = 0;
 	
@@ -292,4 +292,4 @@ namespace Viperfish
 		}
 		return "Undefined";
 	}
-} // namespace Viperfish
+} // namespace Vf

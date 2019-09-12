@@ -20,7 +20,7 @@
 #include <viperfish.hpp>
 #include <viperfish_gamepad.hpp>
 
-namespace Viperfish
+namespace Vf
 {
 GamepadState::GamepadState()
 {
@@ -120,7 +120,7 @@ void GamepadState::Poll()
     }
     else
     {
-        hflog.info("%s(): XInputError: returned %d", __FUNCTION__, result);
+        Hf::Log.info("%s(): XInputError: returned %d", __FUNCTION__, result);
     }
 
     makeHexRepresentation();
@@ -180,4 +180,4 @@ void GamepadState::makeHexRepresentation()
         hexRepresentation_[i + 2] = c;
     }
 }
-} // namespace Viperfish
+} // namespace Vf

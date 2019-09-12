@@ -25,7 +25,7 @@
 #include <Xinput.h>
 #include <viperfish_xinput.hpp>
 
-namespace Viperfish {
+namespace Vf {
 XInputGamepadState::XInputGamepadState()
 {
 }

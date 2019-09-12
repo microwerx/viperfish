@@ -19,14 +19,14 @@
 #include <viperfish.hpp>
 #include <viperfish_gamepad.hpp>
 
-namespace Viperfish
+namespace Vf
 {
 	Widget::Widget()
 	{
 		std::ostringstream ostr;
 		ostr << "unknownwidget" << (void *)this;
 		name_ = ostr.str();
-		hflog.infofn(__FUNCTION__, "Constructing %s", name_.c_str());
+		Hf::Log.infofn(__FUNCTION__, "Constructing %s", name_.c_str());
 	}
 
 	Widget::Widget(const std::string &name) noexcept
@@ -36,7 +36,7 @@ namespace Viperfish
 
 	Widget::~Widget()
 	{
-		hflog.infofn(__FUNCTION__, "Destroying Widget '%s'", name_.c_str());
+		Hf::Log.infofn(__FUNCTION__, "Destroying Widget '%s'", name_.c_str());
 		decorateeWidget_.reset();
 		decoraterWidget_.reset();
 		parent_.reset();
@@ -60,7 +60,7 @@ namespace Viperfish
 	void Widget::common_constructor(const std::string &name) noexcept
 	{
 		name_ = name;
-		hflog.infofn(__FUNCTION__, "Creating Widget '%s'", name_.c_str());
+		Hf::Log.infofn(__FUNCTION__, "Creating Widget '%s'", name_.c_str());
 	}
 
 	void Widget::Init(std::vector<std::string> args)
@@ -89,11 +89,13 @@ namespace Viperfish
 
 	void Widget::MainLoop()
 	{
+		leaveMainLoop_ = false;
 		OnMainLoop();
 	}
 
 	void Widget::LeaveMainLoop()
 	{
+		leaveMainLoop_ = true;
 		OnLeaveMainLoop();
 	}
 
@@ -209,7 +211,7 @@ namespace Viperfish
 
 		if (!json->IsObject())
 		{
-			hflog.error("%s(): style is not an JSON object", __FUNCTION__);
+			Hf::Log.error("%s(): style is not an JSON object", __FUNCTION__);
 			return false;
 		}
 
@@ -648,4 +650,4 @@ namespace Viperfish
 	//		return;
 	//	decoraterWidget_->decorateeWidget_.reset();
 	//}
-} // namespace Viperfish
+} // namespace Vf

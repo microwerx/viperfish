@@ -39,13 +39,13 @@
 #define VF_MOUSE_BUTTON_MIDDLE	0x0001;
 #define VF_MOUSE_BUTTON_RIGHT	0x0002;
 
-namespace Viperfish
+namespace Vf
 {
 
 template <class T, class... _Types>
 static std::shared_ptr<T> MakeShared(_Types &&... _Args) { return std::shared_ptr<T>(new T(std::forward<_Types>(_Args)...)); }
 template <class T, class... _Types>
 static std::unique_ptr<T> MakeUnique(_Types &&... _Args) { return std::unique_ptr<T>(new T(std::forward<_Types>(_Args)...)); }
-} // namespace Viperfish
+} // namespace Vf
 
 #endif
