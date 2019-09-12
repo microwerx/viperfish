@@ -17,7 +17,7 @@
 //
 // For any other type of licensing, please contact me at jmetzgar@outlook.com
 
-#ifdef WIN32
+#ifdef _WIN32
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -143,4 +143,4 @@ bool XInputGamepadState::IsConnected()
 }
 }
 
-#endif // WIN32
+#endif // _WIN32

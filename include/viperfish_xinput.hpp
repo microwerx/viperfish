@@ -22,7 +22,7 @@
 #include <viperfish.hpp>
 #include <viperfish_gamepad.hpp>
 
-#ifdef WIN32
+#ifdef _WIN32
 #define NOMINMAX
 #include <Xinput.h>
 
@@ -54,6 +54,6 @@ class XInputGamepadState : public GamepadState
 };
 } // namespace Vf
 
-#endif // WIN32
+#endif // _WIN32
 
 #endif

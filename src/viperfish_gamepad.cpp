@@ -54,7 +54,7 @@ void GamepadState::Clear()
 
 void GamepadState::Poll()
 {
-#ifdef WIN32
+#ifdef _WIN32
     if (index < 0 || index >= XUSER_MAX_COUNT)
         return;
 
@@ -124,7 +124,7 @@ void GamepadState::Poll()
     }
 
     makeHexRepresentation();
-#endif // WIN32
+#endif // _WIN32
 }
 
 void GamepadState::SetButton(GamePadBitNum bit, bool pressed)

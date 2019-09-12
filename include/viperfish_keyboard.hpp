@@ -22,73 +22,71 @@
 #include <map>
 #include <vector>
 
-#define VF_SHIFT_MODIFIER		0x0001
-#define VF_CTRL_MODIFIER		0x0002
-#define VF_ALT_MODIFIER			0x0004
-#define VF_META_MODIFIER		0x0008
-#define VF_CAPSLOCK_MODIFIER	0x0010
-#define VF_NUMLOCK_MODIFIER		0x0020
+constexpr unsigned VF_SHIFT_MODIFIER = 0x0001;
+constexpr unsigned VF_CTRL_MODIFIER = 0x0002;
+constexpr unsigned VF_ALT_MODIFIER = 0x0004;
+constexpr unsigned VF_META_MODIFIER = 0x0008;
+constexpr unsigned VF_CAPSLOCK_MODIFIER = 0x0010;
+constexpr unsigned VF_NUMLOCK_MODIFIER = 0x0020;
 
-#define VF_KEY_F1                       0x0101
-#define VF_KEY_F2                       0x0102
-#define VF_KEY_F3                       0x0103
-#define VF_KEY_F4                       0x0104
-#define VF_KEY_F5                       0x0105
-#define VF_KEY_F6                       0x0106
-#define VF_KEY_F7                       0x0107
-#define VF_KEY_F8                       0x0108
-#define VF_KEY_F9                       0x0109
-#define VF_KEY_F10                      0x010A
-#define VF_KEY_F11                      0x010B
-#define VF_KEY_F12                      0x010C
-#define VF_KEY_LEFT                     0x0164
-#define VF_KEY_UP                       0x0165
-#define VF_KEY_RIGHT                    0x0166
-#define VF_KEY_DOWN                     0x0167
-#define VF_KEY_PAGE_UP                  0x0168
-#define VF_KEY_PAGE_DOWN                0x0169
-#define VF_KEY_HOME                     0x016A
-#define VF_KEY_END                      0x016B
-#define VF_KEY_INSERT                   0x016C
-#define VF_KEY_NUM_LOCK					0x016D
-#define VF_KEY_BEGIN					0x016E
-#define VF_KEY_DELETE					0x016F
-#define VF_KEY_SHIFT_L					0x0170
-#define VF_KEY_SHIFT_R					0x0171
-#define VF_KEY_CTRL_L					0x0172
-#define VF_KEY_CTRL_R					0x0173
-#define VF_KEY_ALT_L					0x0174
-#define VF_KEY_ALT_R					0x0175
-#define VF_KEY_META_L					0x0176
-#define VF_KEY_META_R					0x0177
-#define VF_KEY_SUPER_L					0x0176
-#define VF_KEY_SUPER_R					0x0177
-#define VF_KEY_MENU						0x0178
-#define VF_KEY_KP_0						0x140
-#define VF_KEY_KP_1						0x141
-#define VF_KEY_KP_2						0x142
-#define VF_KEY_KP_3						0x143
-#define VF_KEY_KP_4						0x144
-#define VF_KEY_KP_5						0x145
-#define VF_KEY_KP_6						0x146
-#define VF_KEY_KP_7						0x147
-#define VF_KEY_KP_8						0x148
-#define VF_KEY_KP_9						0x149
-#define VF_KEY_KP_DECIMAL				0x150
-#define VF_KEY_KP_DIVIDE				0x151
-#define VF_KEY_KP_MULTIPLY				0x152
-#define VF_KEY_KP_SUBTRACT				0x153
-#define VF_KEY_KP_ADD					0x154
-#define VF_KEY_KP_ENTER					0x155
-#define VF_KEY_KP_EQUAL					0x156
+constexpr unsigned VF_KEY_F1 = 0x0101;
+constexpr unsigned VF_KEY_F2 = 0x0102;
+constexpr unsigned VF_KEY_F3 = 0x0103;
+constexpr unsigned VF_KEY_F4 = 0x0104;
+constexpr unsigned VF_KEY_F5 = 0x0105;
+constexpr unsigned VF_KEY_F6 = 0x0106;
+constexpr unsigned VF_KEY_F7 = 0x0107;
+constexpr unsigned VF_KEY_F8 = 0x0108;
+constexpr unsigned VF_KEY_F9 = 0x0109;
+constexpr unsigned VF_KEY_F10 = 0x010A;
+constexpr unsigned VF_KEY_F11 = 0x010B;
+constexpr unsigned VF_KEY_F12 = 0x010C;
+constexpr unsigned VF_KEY_LEFT = 0x0164;
+constexpr unsigned VF_KEY_UP = 0x0165;
+constexpr unsigned VF_KEY_RIGHT = 0x0166;
+constexpr unsigned VF_KEY_DOWN = 0x0167;
+constexpr unsigned VF_KEY_PAGE_UP = 0x0168;
+constexpr unsigned VF_KEY_PAGE_DOWN = 0x0169;
+constexpr unsigned VF_KEY_HOME = 0x016A;
+constexpr unsigned VF_KEY_END = 0x016B;
+constexpr unsigned VF_KEY_INSERT = 0x016C;
+constexpr unsigned VF_KEY_NUM_LOCK = 0x016D;
+constexpr unsigned VF_KEY_BEGIN = 0x016E;
+constexpr unsigned VF_KEY_DELETE = 0x016F;
+constexpr unsigned VF_KEY_SHIFT_L = 0x0170;
+constexpr unsigned VF_KEY_SHIFT_R = 0x0171;
+constexpr unsigned VF_KEY_CTRL_L = 0x0172;
+constexpr unsigned VF_KEY_CTRL_R = 0x0173;
+constexpr unsigned VF_KEY_ALT_L = 0x0174;
+constexpr unsigned VF_KEY_ALT_R = 0x0175;
+constexpr unsigned VF_KEY_META_L = 0x0176;
+constexpr unsigned VF_KEY_META_R = 0x0177;
+constexpr unsigned VF_KEY_SUPER_L = 0x0176;
+constexpr unsigned VF_KEY_SUPER_R = 0x0177;
+constexpr unsigned VF_KEY_MENU = 0x0178;
+constexpr unsigned VF_KEY_KP_0 = 0x140;
+constexpr unsigned VF_KEY_KP_1 = 0x141;
+constexpr unsigned VF_KEY_KP_2 = 0x142;
+constexpr unsigned VF_KEY_KP_3 = 0x143;
+constexpr unsigned VF_KEY_KP_4 = 0x144;
+constexpr unsigned VF_KEY_KP_5 = 0x145;
+constexpr unsigned VF_KEY_KP_6 = 0x146;
+constexpr unsigned VF_KEY_KP_7 = 0x147;
+constexpr unsigned VF_KEY_KP_8 = 0x148;
+constexpr unsigned VF_KEY_KP_9 = 0x149;
+constexpr unsigned VF_KEY_KP_DECIMAL = 0x150;
+constexpr unsigned VF_KEY_KP_DIVIDE = 0x151;
+constexpr unsigned VF_KEY_KP_MULTIPLY = 0x152;
+constexpr unsigned VF_KEY_KP_SUBTRACT = 0x153;
+constexpr unsigned VF_KEY_KP_ADD = 0x154;
+constexpr unsigned VF_KEY_KP_ENTER = 0x155;
+constexpr unsigned VF_KEY_KP_EQUAL = 0x156;
 
 namespace Vf
 {
 
 	struct KeyboardState
 	{
-		//map<int, bool> keys;
-		//map<int, bool> modkeys;
 		std::map<std::string, int> keys;
 		int modifiers;
 
@@ -112,28 +110,41 @@ namespace Vf
 			keys.clear();
 			modifiers = 0;
 		}
+
 		inline void Reset()
 		{
 			modifiers = 0;
-			for (auto &key : keys) {
+			for (auto& key : keys)
+			{
 				key.second = false;
 			}
 		}
-		inline void SetKey(const std::string &key, bool state) { keys[key] = state; }
-		inline void SetKey(const std::string &key, int keymod, bool state)
+
+		inline void SetKey(const std::string& key, bool state)
+		{
+			keys[key] = state;
+		}
+
+		inline void SetKey(const std::string& key, int keymod, bool state)
 		{
 			modifiers = keymod;
 			keys[key] = state;
 		}
+
 		void SetKey(unsigned char c, int keymod, bool state);
-		inline bool IsPressed(const std::string &key) const
+
+		inline bool IsPressed(const std::string& key) const
 		{
 			std::map<std::string, int>::const_iterator it = keys.find(key);
 			if (it != keys.end())
+			{
 				return it->second;
+			}
 			return false;
 		}
-		inline bool IsPressed(const std::string &key, int keymod) const { return keymod == modifiers && IsPressed(key); }
+
+		inline bool IsPressed(const std::string& key, int keymod) const { return keymod == modifiers && IsPressed(key); }
+
 		bool CheckKeyPressed(std::vector<std::string> keys);
 		int CountKeysPressed(std::vector<std::string> keys);
 	};
@@ -141,9 +152,9 @@ namespace Vf
 	int GetKeyboardModifiers();
 	int SetKeyboardModifiers(bool shiftKey, bool ctrlKey, bool altKey, bool metaKey, bool capsLock, bool numLock);
 
-	const char *KeyToHTML5Name(char c);
-	const char *SpecialKeyToHTML5Name(int key);
-	int HTML5NameToKey(const std::string &key);
+	const char* KeyToHTML5Name(char c);
+	const char* SpecialKeyToHTML5Name(int key);
+	int HTML5NameToKey(const std::string& key);
 
 } // namespace Vf
 
