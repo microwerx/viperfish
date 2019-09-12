@@ -26,7 +26,7 @@ namespace Vf
 		std::ostringstream ostr;
 		ostr << "unknownwidget" << (void *)this;
 		name_ = ostr.str();
-		Hf::Log.infofn(__FUNCTION__, "Constructing %s", name_.c_str());
+		HFLOGINFO("Constructing %s", name_.c_str());
 	}
 
 	Widget::Widget(const std::string &name) noexcept
@@ -36,7 +36,7 @@ namespace Vf
 
 	Widget::~Widget()
 	{
-		Hf::Log.infofn(__FUNCTION__, "Destroying Widget '%s'", name_.c_str());
+		HFLOGINFO("Destroying Widget '%s'", name_.c_str());
 		decorateeWidget_.reset();
 		decoraterWidget_.reset();
 		parent_.reset();
@@ -60,7 +60,7 @@ namespace Vf
 	void Widget::common_constructor(const std::string &name) noexcept
 	{
 		name_ = name;
-		Hf::Log.infofn(__FUNCTION__, "Creating Widget '%s'", name_.c_str());
+		HFLOGINFO("Creating Widget '%s'", name_.c_str());
 	}
 
 	void Widget::Init(std::vector<std::string> args)
