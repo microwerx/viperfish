@@ -24,7 +24,7 @@
 #include <Xinput.h>
 #endif
 #include <hatchetfish.hpp>
-#include <fluxions_gte_math.hpp>
+#include <fluxions_gte_scalar_math.hpp>
 
 namespace Vf
 {

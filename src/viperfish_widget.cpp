@@ -23,98 +23,82 @@
 
 namespace Vf
 {
-	Widget::Widget()
-	{
+	Widget::Widget() {
 		std::ostringstream ostr;
-		ostr << "unknownwidget" << (void *)this;
+		ostr << "unknownwidget" << (void*)this;
 		name_ = ostr.str();
 		HFLOGINFO("Constructing %s", name_.c_str());
 	}
 
-	Widget::Widget(const std::string &name) noexcept
-	{
+	Widget::Widget(const std::string& name) noexcept {
 		common_constructor(name);
 	}
 
-	Widget::~Widget()
-	{
+	Widget::~Widget() {
 		HFLOGINFO("Destroying Widget '%s'", name_.c_str());
 		decorateeWidget_.reset();
 		decoraterWidget_.reset();
 		parent_.reset();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w.reset();
 		}
 	}
 
-	void Widget::Init(int argc, char **argv)
-	{
+	void Widget::Init(int argc, char** argv) {
 		std::vector<std::string> args;
-		for (int i = 0; i < argc; i++)
-		{
+		for (int i = 0; i < argc; i++) {
 			args.push_back(argv[i]);
 		}
 
 		Init(args);
 	}
 
-	void Widget::common_constructor(const std::string &name) noexcept
-	{
+	void Widget::common_constructor(const std::string& name) noexcept {
 		name_ = name;
 		HFLOGINFO("Creating Widget '%s'", name_.c_str());
 	}
 
-	void Widget::Init(std::vector<std::string> args)
-	{
-		for (int i = 0; i < 4; i++)
-		{
+	void Widget::Init(std::vector<std::string> args) {
+		for (int i = 0; i < 4; i++) {
 			gamepads[i].Init(i);
 		}
 
 		OnInit(args);
 	}
 
-	void Widget::Kill()
-	{
+	void Widget::Kill() {
 		OnKill();
 
 		// free the child, then the parent
 		decorateeWidget_.reset();
 		decoraterWidget_.reset();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w.reset();
 		}
 		parent_.reset();
 	}
 
-	void Widget::MainLoop()
-	{
+	void Widget::MainLoop() {
 		leaveMainLoop_ = false;
 		OnMainLoop();
 	}
 
-	void Widget::LeaveMainLoop()
-	{
+	void Widget::LeaveMainLoop() {
 		leaveMainLoop_ = true;
 		OnLeaveMainLoop();
 	}
 
-	void Widget::PollGamepads()
-	{
+	void Widget::PollGamepads() {
 		for (int i = 0; i < 4; i++)
 			gamepads[i].index = i;
 		for (int i = 0; i < 4; i++)
 			gamepads[i].Poll();
 	}
 
-	void Widget::HandleKey(const std::string &key, int keymod, bool pressed)
-	{
+	void Widget::HandleKey(const std::string& key, int keymod, bool pressed) {
 		keyboard.SetKey(key, keymod, pressed);
 
-		if (keymod == 0)
-		{
+		if (keymod == 0) {
 			kbgamepad.SetButton(GamePadBitNum::UP, keyboard.CheckKeyPressed({ "w", "W", "z", "Z", "Up", "ArrowUp" }));
 			kbgamepad.SetButton(GamePadBitNum::DOWN, keyboard.CheckKeyPressed({ "s", "S", "Down", "ArrowDown" }));
 			kbgamepad.SetButton(GamePadBitNum::LEFT, keyboard.CheckKeyPressed({ "a", "A", "Q", "q", "Left", "ArrowLeft" }));
@@ -168,43 +152,35 @@ namespace Vf
 		}
 	}
 
-	void Widget::HandleMouseButton(int button, bool pressed)
-	{
+	void Widget::HandleMouseButton(int button, bool pressed) {
 		if (pressed)
 			mouse.OnButtonDown(button);
 		else
 			mouse.OnButtonUp(button);
 	}
 
-	void Widget::HandleMouseMove(int x, int y)
-	{
+	void Widget::HandleMouseMove(int x, int y) {
 		mouse.OnMove(x, y);
-		for (auto &button : mouse.buttons)
-		{
-			if (button.second)
-			{
+		for (auto& button : mouse.buttons) {
+			if (button.second) {
 				OnMouseDrag(button.first, mouse.dragStates[button.first]);
 			}
 		}
 	}
 
-	void Widget::HandleMouseClick(const MouseClickState &mcs)
-	{
+	void Widget::HandleMouseClick(const MouseClickState& mcs) {
 		mouse.OnClick(mcs);
 	}
 
-	void Widget::HandleMouseDoubleClick(const MouseDoubleClickState &mdcs)
-	{
+	void Widget::HandleMouseDoubleClick(const MouseDoubleClickState& mdcs) {
 		mouse.OnDoubleClick(mdcs);
 	}
 
-	void Widget::HandleMouseDrag(const MouseDragState &mds)
-	{
+	void Widget::HandleMouseDrag(const MouseDragState& mds) {
 		mouse.OnDrag(mds);
 	}
 
-	bool Widget::processStyle(const std::string &style)
-	{
+	bool Widget::processStyle(const std::string& style) {
 		/*
 		using namespace Df;
 		JSONPtr json = JSON::MakeNull();
@@ -246,391 +222,321 @@ namespace Vf
 		return true;
 	}
 
-	void Widget::OnInit(const std::vector<std::string> &args)
-	{
+	void Widget::OnInit(const std::vector<std::string>& args) {
 		leaveMainLoop_ = false;
 		if (decorateeWidget_)
 			decorateeWidget_->OnInit(args);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnInit(args);
 		}
 	}
 
-	void Widget::OnKill()
-	{
+	void Widget::OnKill() {
 		if (decorateeWidget_)
 			decorateeWidget_->OnKill();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnKill();
 		}
 	}
 
-	void Widget::OnUpdate(double timeStamp)
-	{
+	void Widget::OnUpdate(double timeStamp) {
 		t0 = t1;
 		t1 = timeStamp;
 
 		PollGamepads();
 		if (decorateeWidget_)
 			decorateeWidget_->OnUpdate(timeStamp);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnUpdate(timeStamp);
 		}
 	}
 
-	void Widget::OnKeyDown(const std::string &key, int keymod)
-	{
+	void Widget::OnKeyDown(const std::string& key, int keymod) {
 		HandleKey(key, keymod, true);
 		if (decorateeWidget_)
 			decorateeWidget_->OnKeyDown(key, keymod);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnKeyDown(key, keymod);
 		}
 	}
 
-	void Widget::OnKeyUp(const std::string &key, int keymod)
-	{
+	void Widget::OnKeyUp(const std::string& key, int keymod) {
 		HandleKey(key, keymod, false);
 		if (decorateeWidget_)
 			decorateeWidget_->OnKeyUp(key, keymod);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnKeyUp(key, keymod);
 		}
 	}
 
-	void Widget::OnMouseButtonDown(int button)
-	{
+	void Widget::OnMouseButtonDown(int button) {
 		HandleMouseButton(button, true);
 		if (decorateeWidget_)
 			decorateeWidget_->OnMouseButtonDown(button);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMouseButtonDown(button);
 		}
 	}
 
-	void Widget::OnMouseButtonUp(int button)
-	{
+	void Widget::OnMouseButtonUp(int button) {
 		HandleMouseButton(button, false);
 		if (decorateeWidget_)
 			decorateeWidget_->OnMouseButtonUp(button);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMouseButtonUp(button);
 		}
 	}
 
-	void Widget::OnMouseMove(int x, int y)
-	{
+	void Widget::OnMouseMove(int x, int y) {
 		HandleMouseMove(x, y);
 		if (decorateeWidget_)
 			decorateeWidget_->OnMouseMove(x, y);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMouseMove(x, y);
 		}
 	}
 
-	void Widget::OnMouseClick(int button, const MouseClickState &mcs)
-	{
+	void Widget::OnMouseClick(int button, const MouseClickState& mcs) {
 		HandleMouseClick(mcs);
 		if (decorateeWidget_)
 			decorateeWidget_->OnMouseClick(button, mcs);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMouseClick(button, mcs);
 		}
 	}
 
-	void Widget::OnMouseDoubleClick(int button, const MouseDoubleClickState &mdcs)
-	{
+	void Widget::OnMouseDoubleClick(int button, const MouseDoubleClickState& mdcs) {
 		HandleMouseDoubleClick(mdcs);
 		if (decorateeWidget_)
 			decorateeWidget_->OnMouseDoubleClick(button, mdcs);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMouseDoubleClick(button, mdcs);
 		}
 	}
 
-	void Widget::OnMouseDrag(int button, const MouseDragState &mds)
-	{
+	void Widget::OnMouseDrag(int button, const MouseDragState& mds) {
 		HandleMouseDrag(mds);
 		if (decorateeWidget_)
 			decorateeWidget_->OnMouseDrag(button, mds);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMouseDrag(button, mds);
 		}
 	}
 
-	void Widget::OnMouseEnter()
-	{
+	void Widget::OnMouseEnter() {
 		if (decorateeWidget_)
 			decorateeWidget_->OnMouseEnter();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMouseEnter();
 		}
 	}
 
-	void Widget::OnMouseLeave()
-	{
+	void Widget::OnMouseLeave() {
 		if (decorateeWidget_)
 			decorateeWidget_->OnMouseLeave();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMouseLeave();
 		}
 	}
 
-	void Widget::OnMultiEnter(int id)
-	{
+	void Widget::OnMultiEnter(int id) {
 		if (decorateeWidget_)
 			decorateeWidget_->OnMultiEnter(id);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMultiEnter(id);
 		}
 	}
 
-	void Widget::OnMultiLeave(int id)
-	{
+	void Widget::OnMultiLeave(int id) {
 		if (decorateeWidget_)
 			decorateeWidget_->OnMultiLeave(id);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMultiLeave(id);
 		}
 	}
 
-	void Widget::OnMultiButtonDown(int id, int button, const MouseState &ms)
-	{
+	void Widget::OnMultiButtonDown(int id, int button, const MouseState& ms) {
 		if (decorateeWidget_)
 			decorateeWidget_->OnMultiButtonDown(id, button, ms);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMultiButtonDown(id, button, ms);
 		}
 	}
 
-	void Widget::OnMultiButtonUp(int id, int button, const MouseState &ms)
-	{
+	void Widget::OnMultiButtonUp(int id, int button, const MouseState& ms) {
 		if (decorateeWidget_)
 			decorateeWidget_->OnMultiButtonUp(id, button, ms);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMultiButtonUp(id, button, ms);
 		}
 	}
 
-	void Widget::OnMultiMove(int x, int y, const MouseState &ms)
-	{
+	void Widget::OnMultiMove(int x, int y, const MouseState& ms) {
 		if (decorateeWidget_)
 			decorateeWidget_->OnMultiMove(x, y, ms);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMultiMove(x, y, ms);
 		}
 	}
 
-	void Widget::OnGainFocus()
-	{
+	void Widget::OnGainFocus() {
 		if (decorateeWidget_)
 			decorateeWidget_->OnGainFocus();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnGainFocus();
 		}
 	}
 
-	void Widget::OnLostFocus()
-	{
+	void Widget::OnLostFocus() {
 		if (decorateeWidget_)
 			decorateeWidget_->OnLostFocus();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnLostFocus();
 		}
 	}
 
-	void Widget::OnInitContext()
-	{
+	void Widget::OnInitContext() {
 		if (decorateeWidget_)
 			decorateeWidget_->OnInitContext();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnInitContext();
 		}
 	}
 
-	void Widget::OnPauseApp()
-	{
+	void Widget::OnPauseApp() {
 		if (decorateeWidget_)
 			decorateeWidget_->OnPauseApp();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnPauseApp();
 		}
 	}
 
-	void Widget::OnResumeApp()
-	{
+	void Widget::OnResumeApp() {
 		if (decorateeWidget_)
 			decorateeWidget_->OnResumeApp();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnResumeApp();
 		}
 	}
 
-	void Widget::OnWindowMove(int x, int y)
-	{
+	void Widget::OnWindowMove(int x, int y) {
 		windowRect_.x = x;
 		windowRect_.y = y;
 		if (decorateeWidget_)
 			decorateeWidget_->OnWindowMove(x, y);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnWindowMove(x, y);
 		}
 	}
 
-	void Widget::OnWindowVisible()
-	{
+	void Widget::OnWindowVisible() {
 		visible_ = true;
 		if (decorateeWidget_)
 			decorateeWidget_->OnWindowVisible();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnWindowVisible();
 		}
 	}
 
-	void Widget::OnWindowHidden()
-	{
+	void Widget::OnWindowHidden() {
 		visible_ = false;
 		if (decorateeWidget_)
 			decorateeWidget_->OnWindowHidden();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnWindowHidden();
 		}
 	}
 
-	void Widget::OnGamepadAxis(int axis, float value, const GamepadState &gs)
-	{
+	void Widget::OnGamepadAxis(int axis, float value, const GamepadState& gs) {
 		if (decorateeWidget_)
 			decorateeWidget_->OnGamepadAxis(axis, value, gs);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnGamepadAxis(axis, value, gs);
 		}
 	}
 
-	void Widget::OnGamepadButtonDown(int button, float value, const GamepadState &gs)
-	{
+	void Widget::OnGamepadButtonDown(int button, float value, const GamepadState& gs) {
 		if (decorateeWidget_)
 			decorateeWidget_->OnGamepadButtonDown(button, value, gs);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnGamepadButtonDown(button, value, gs);
 		}
 	}
 
-	void Widget::OnGamepadButtonUp(int button, float value, const GamepadState &gs)
-	{
+	void Widget::OnGamepadButtonUp(int button, float value, const GamepadState& gs) {
 		if (decorateeWidget_)
 			decorateeWidget_->OnGamepadButtonUp(button, value, gs);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnGamepadButtonUp(button, value, gs);
 		}
 	}
 
-	void Widget::OnReshape(int width, int height)
-	{
+	void Widget::OnReshape(int width, int height) {
 		windowRect_.w = width;
 		windowRect_.h = height;
 		if (decorateeWidget_)
 			decorateeWidget_->OnReshape(width, height);
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnReshape(width, height);
 		}
 	}
 
-	void Widget::OnPreRender()
-	{
-		if (decorateeWidget_)
-		{
+	void Widget::OnPreRender() {
+		HFLOGDEBUGFIRSTRUN();
+		if (decorateeWidget_) {
 			decorateeWidget_->OnPreRender();
 		}
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnPreRender();
 		}
 	}
 
-	void Widget::OnRender3D()
-	{
+	void Widget::OnRender3D() {
+		HFLOGDEBUGFIRSTRUN();
 		if (decorateeWidget_)
 			decorateeWidget_->OnRender3D();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnRender3D();
 		}
 	}
 
-	void Widget::OnRender2D()
-	{
+	void Widget::OnRender2D() {
+		HFLOGDEBUGFIRSTRUN();
 		if (decorateeWidget_)
 			decorateeWidget_->OnRender2D();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnRender2D();
 		}
 	}
 
-	void Widget::OnRenderDearImGui()
-	{
+	void Widget::OnRenderDearImGui() {
+		HFLOGDEBUGFIRSTRUN();
 		if (decorateeWidget_)
 			decorateeWidget_->OnRenderDearImGui();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnRenderDearImGui();
 		}
 	}
 
-	void Widget::OnPostRender()
-	{
-		if (decorateeWidget_)
-		{
+	void Widget::OnPostRender() {
+		HFLOGDEBUGFIRSTRUN();
+		if (decorateeWidget_) {
 			decorateeWidget_->OnPostRender();
 		}
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnPostRender();
 		}
 	}
 
-	void Widget::OnMainLoop()
-	{
+	void Widget::OnMainLoop() {
 		if (decorateeWidget_)
 			decorateeWidget_->OnMainLoop();
-		for (auto &w : children_)
-		{
+		for (auto& w : children_) {
 			w->OnMainLoop();
 		}
 	}
 
-	void Widget::OnLeaveMainLoop()
-	{
+	void Widget::OnLeaveMainLoop() {
 		leaveMainLoop_ = true;
 		if (decoraterWidget_)
 			decoraterWidget_->OnLeaveMainLoop();

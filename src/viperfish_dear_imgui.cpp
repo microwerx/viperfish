@@ -19,33 +19,23 @@
 #include <viperfish_dear_imgui.hpp>
 #include <fluxions_fileio.hpp>
 
-#pragma comment(lib, "glew32.lib")
-#pragma comment(lib, "hatchetfish.lib")
-#pragma comment(lib, "fluxions-gte.lib")
-#pragma comment(lib, "fluxions-deps.lib")
-#pragma comment(lib, "opengl32.lib")
-
 namespace Vf
 {
 	DearImGuiWidget::DearImGuiWidget()
-		: Widget("imguiwidget")
-	{
+		: Widget("imguiwidget") {
 
 	}
 
-	DearImGuiWidget::DearImGuiWidget(const std::string &name)
-		: Widget(name)
-	{
+	DearImGuiWidget::DearImGuiWidget(const std::string& name)
+		: Widget(name) {
 
 	}
 
-	DearImGuiWidget::~DearImGuiWidget()
-	{
+	DearImGuiWidget::~DearImGuiWidget() {
 
 	}
 
-	void DearImGuiWidget::OnInit(const std::vector<std::string> &args)
-	{
+	void DearImGuiWidget::OnInit(const std::vector<std::string>& args) {
 		Widget::OnInit(args);
 
 		Hf::Log.infofn(__FUNCTION__, "Creating Dear ImGui Context");
@@ -57,7 +47,7 @@ namespace Vf
 
 		FilePathInfo urwdock("resources/fonts/dock-medium.otf");
 		if (urwdock.Exists()) {
-			ImFont *font = pIO->Fonts->AddFontFromFileTTF("resources/fonts/dock-medium.otf", 24.0f);
+			ImFont* font = pIO->Fonts->AddFontFromFileTTF("resources/fonts/dock-medium.otf", 24.0f);
 			if (!font) {
 				HFLOGWARN("Dock Font cannot to be loaded");
 			}
@@ -87,8 +77,7 @@ namespace Vf
 		CreateDeviceObjects();
 	}
 
-	void DearImGuiWidget::OnKill()
-	{
+	void DearImGuiWidget::OnKill() {
 		InvalidateDeviceObjects();
 		Hf::Log.infofn(__FUNCTION__, "Destroying Dear ImGui Context");
 		ImGui::DestroyContext(pImGuiContext);
@@ -98,32 +87,27 @@ namespace Vf
 		Widget::OnKill();
 	}
 
-	void DearImGuiWidget::OnMouseButtonDown(int button)
-	{
+	void DearImGuiWidget::OnMouseButtonDown(int button) {
 		Widget::OnMouseButtonDown(button);
 		if (within(button, 0, 4) && pIO != nullptr)
 			pIO->MouseDown[button] = true;
 	}
 
-	void DearImGuiWidget::OnMouseButtonUp(int button)
-	{
+	void DearImGuiWidget::OnMouseButtonUp(int button) {
 		Widget::OnMouseButtonUp(button);
 		if (within(button, 0, 4) && pIO != nullptr)
 			pIO->MouseDown[button] = false;
 	}
 
-	void DearImGuiWidget::OnMouseMove(int x, int y)
-	{
+	void DearImGuiWidget::OnMouseMove(int x, int y) {
 		Widget::OnMouseMove(x, y);
-		if (pIO != nullptr)
-		{
+		if (pIO != nullptr) {
 			pIO->MousePos.x = (float)x;
 			pIO->MousePos.y = (float)y;
 		}
 	}
 
-	void DearImGuiWidget::OnKeyDown(const std::string &key, int keymod)
-	{
+	void DearImGuiWidget::OnKeyDown(const std::string& key, int keymod) {
 		Widget::OnKeyDown(key, keymod);
 		if (pIO == nullptr || key.empty())
 			return;
@@ -132,14 +116,12 @@ namespace Vf
 		pIO->KeyCtrl = keymod & KeyboardState::CtrlKeyBit;
 		pIO->KeyShift = keymod & KeyboardState::ShiftKeyBit;
 
-		if (within(HTML5NameToKey(key), 0, 511))
-		{
+		if (within(HTML5NameToKey(key), 0, 511)) {
 			pIO->KeysDown[HTML5NameToKey(key)] = true;
 		}
 	}
 
-	void DearImGuiWidget::OnKeyUp(const std::string &key, int keymod)
-	{
+	void DearImGuiWidget::OnKeyUp(const std::string& key, int keymod) {
 		Widget::OnKeyUp(key, keymod);
 		if (pIO == nullptr || key.empty())
 			return;
@@ -148,16 +130,13 @@ namespace Vf
 		pIO->KeyCtrl = keymod & KeyboardState::CtrlKeyBit;
 		pIO->KeyShift = keymod & KeyboardState::ShiftKeyBit;
 
-		if (within(HTML5NameToKey(key), 0, 511))
-		{
+		if (within(HTML5NameToKey(key), 0, 511)) {
 			pIO->KeysDown[HTML5NameToKey(key)] = false;
 		}
 	}
 
-	void DearImGuiWidget::OnUpdate(double timeStamp)
-	{
-		if (program && pIO != nullptr)
-		{
+	void DearImGuiWidget::OnUpdate(double timeStamp) {
+		if (program && pIO != nullptr) {
 			pIO->DisplaySize.x = (float)windowRect().w;
 			pIO->DisplaySize.y = (float)windowRect().h;
 			pIO->DeltaTime = fabsf((float)(timeStamp - getT1()));
@@ -166,8 +145,7 @@ namespace Vf
 		Widget::OnUpdate(timeStamp);
 	}
 
-	void DearImGuiWidget::OnPreRender()
-	{
+	void DearImGuiWidget::OnPreRender() {
 		HFLOGDEBUGFIRSTRUN();
 
 		Widget::OnPreRender();
@@ -175,8 +153,7 @@ namespace Vf
 		ImGui::NewFrame();
 	}
 
-	void DearImGuiWidget::OnPostRender()
-	{
+	void DearImGuiWidget::OnPostRender() {
 		HFLOGDEBUGFIRSTRUN();
 
 		Widget::OnPostRender();
@@ -185,16 +162,14 @@ namespace Vf
 		RenderDrawLists();
 	}
 
-	void DearImGuiWidget::OnRenderDearImGui()
-	{
+	void DearImGuiWidget::OnRenderDearImGui() {
 		HFLOGDEBUGFIRSTRUN();
 
 		if (!program) return;
 		Widget::OnRenderDearImGui();
 	}
 
-	bool DearImGuiWidget::CreateDeviceObjects()
-	{
+	bool DearImGuiWidget::CreateDeviceObjects() {
 		HFLOGDEBUG("Creating Dear ImGui device objects...");
 		// Backup GL state
 		GLint last_texture, last_array_buffer, last_vertex_array;
@@ -207,7 +182,7 @@ namespace Vf
 			HFLOGERROR("Unable to create Dear ImGui font texture");
 			return false;
 		}
-		unsigned char *pixels;
+		unsigned char* pixels;
 		int w;
 		int h;
 		pIO->Fonts->GetTexDataAsRGBA32(&pixels, &w, &h);
@@ -221,7 +196,7 @@ namespace Vf
 		long long id = fontTextureId;
 		pIO->Fonts->TexID = (ImTextureID)id;
 
-		const GLchar *vertex_shader = "#version 100\n"
+		const GLchar* vertex_shader = "#version 100\n"
 			"precision highp float;\n"
 			"uniform mat4 ProjectionMatrix;\n"
 			"attribute vec4 aPosition;\n"
@@ -236,7 +211,7 @@ namespace Vf
 			"  gl_Position = ProjectionMatrix * vec4(aPosition.xyz,1.0);\n"
 			"}\n";
 
-		const GLchar *fragment_shader = "#version 100\n"
+		const GLchar* fragment_shader = "#version 100\n"
 			"precision highp float;\n"
 			"uniform sampler2D Texture0;\n"
 			"varying vec3 vTexcoord;\n"
@@ -250,8 +225,7 @@ namespace Vf
 		vshader = glCreateShader(GL_VERTEX_SHADER);
 		fshader = glCreateShader(GL_FRAGMENT_SHADER);
 		bool result = true;
-		if (program == 0 || vshader == 0 || fshader == 0)
-		{
+		if (program == 0 || vshader == 0 || fshader == 0) {
 			HFLOGERROR("Unable to create Dear ImGui shader program and/or shaders");
 			return false;
 		}
@@ -263,9 +237,8 @@ namespace Vf
 		int infoLogLength;
 		glGetShaderiv(vshader, GL_COMPILE_STATUS, &shaderCompileStatus);
 		glGetShaderiv(vshader, GL_INFO_LOG_LENGTH, &infoLogLength);
-		if (!shaderCompileStatus)
-		{
-			char *infoLog = new char[infoLogLength + 1];
+		if (!shaderCompileStatus) {
+			char* infoLog = new char[infoLogLength + 1];
 			infoLog[infoLogLength] = '\0';
 			glGetShaderInfoLog(vshader, infoLogLength, NULL, infoLog);
 			HFLOGERROR("failed to compile Dear ImGui vertex shader\n-----\n%s-----\n%s\n-----\n", infoLog, vertex_shader);
@@ -279,9 +252,8 @@ namespace Vf
 		// check if compiled...
 		glGetShaderiv(fshader, GL_COMPILE_STATUS, &shaderCompileStatus);
 		glGetShaderiv(fshader, GL_INFO_LOG_LENGTH, &infoLogLength);
-		if (!shaderCompileStatus)
-		{
-			char *infoLog = new char[infoLogLength + 1];
+		if (!shaderCompileStatus) {
+			char* infoLog = new char[infoLogLength + 1];
 			infoLog[infoLogLength] = '\0';
 			glGetShaderInfoLog(fshader, infoLogLength, NULL, infoLog);
 			HFLOGERROR("failed to compile Dear ImGui fragment shader\n-----\n%s-----\n%s\n-----\n", infoLog, fragment_shader);
@@ -291,8 +263,7 @@ namespace Vf
 			result = false;
 		}
 
-		if (!result)
-		{
+		if (!result) {
 			glDeleteProgram(program);
 			program = 0;
 			return false;
@@ -304,9 +275,8 @@ namespace Vf
 		// check if linked...
 		GLint programLinkStatus;
 		glGetProgramiv(program, GL_LINK_STATUS, &programLinkStatus);
-		if (!programLinkStatus)
-		{
-			char *infoLog = new char[infoLogLength + 1];
+		if (!programLinkStatus) {
+			char* infoLog = new char[infoLogLength + 1];
 			infoLog[infoLogLength] = '\0';
 			glGetProgramInfoLog(program, infoLogLength, NULL, infoLog);
 			Hf::Log.error("%s(): failed to link Dear ImGui program\n%s\n", infoLog);
@@ -330,9 +300,9 @@ namespace Vf
 		glEnableVertexAttribArray(aColorLoc);
 
 #define OFFSETOF(TYPE, ELEMENT) ((size_t) & (((TYPE *)0)->ELEMENT))
-		glVertexAttribPointer(aPositionLoc, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid *)OFFSETOF(ImDrawVert, pos));
-		glVertexAttribPointer(aTexcoordLoc, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid *)OFFSETOF(ImDrawVert, uv));
-		glVertexAttribPointer(aColorLoc, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(ImDrawVert), (GLvoid *)OFFSETOF(ImDrawVert, col));
+		glVertexAttribPointer(aPositionLoc, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, pos));
+		glVertexAttribPointer(aTexcoordLoc, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, uv));
+		glVertexAttribPointer(aColorLoc, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, col));
 #undef OFFSETOF
 
 		// Restore modified GL state
@@ -344,8 +314,7 @@ namespace Vf
 		return true;
 	}
 
-	void DearImGuiWidget::InvalidateDeviceObjects()
-	{
+	void DearImGuiWidget::InvalidateDeviceObjects() {
 		if (vao)
 			glDeleteVertexArrays(1, &vao);
 		if (abo)
@@ -370,8 +339,7 @@ namespace Vf
 			glDeleteProgram(program);
 		program = 0;
 
-		if (fontTextureId)
-		{
+		if (fontTextureId) {
 			glDeleteTextures(1, &fontTextureId);
 			ImGui::GetIO().Fonts->TexID = 0;
 			fontTextureId = 0;
@@ -379,13 +347,12 @@ namespace Vf
 		Hf::Log.infofn(__FUNCTION__, "Dear ImGui Device Objects Invalidated");
 	}
 
-	void DearImGuiWidget::RenderDrawLists()
-	{
+	void DearImGuiWidget::RenderDrawLists() {
 		if (program == 0)
 			return;
-		ImDrawData *draw_data = ImGui::GetDrawData();
+		ImDrawData* draw_data = ImGui::GetDrawData();
 		// Avoid rendering when minimized, scale coordinates for retina displays (screen coordinates != framebuffer coordinates)
-		ImGuiIO &io = ImGui::GetIO();
+		ImGuiIO& io = ImGui::GetIO();
 		int fb_width = (int)(io.DisplaySize.x * io.DisplayFramebufferScale.x);
 		int fb_height = (int)(io.DisplaySize.y * io.DisplayFramebufferScale.y);
 		if (fb_width == 0 || fb_height == 0)
@@ -448,26 +415,22 @@ namespace Vf
 		glUniformMatrix4fv(uProjectionMatrixLoc, 1, GL_FALSE, &ortho_projection[0][0]);
 		glBindVertexArray(vao);
 
-		for (int n = 0; n < draw_data->CmdListsCount; n++)
-		{
-			const ImDrawList *cmd_list = draw_data->CmdLists[n];
-			const ImDrawIdx *idx_buffer_offset = 0;
+		for (int n = 0; n < draw_data->CmdListsCount; n++) {
+			const ImDrawList* cmd_list = draw_data->CmdLists[n];
+			const ImDrawIdx* idx_buffer_offset = 0;
 
 			glBindBuffer(GL_ARRAY_BUFFER, abo);
-			glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)cmd_list->VtxBuffer.Size * sizeof(ImDrawVert), (const GLvoid *)cmd_list->VtxBuffer.Data, GL_STREAM_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)cmd_list->VtxBuffer.Size * sizeof(ImDrawVert), (const GLvoid*)cmd_list->VtxBuffer.Data, GL_STREAM_DRAW);
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eabo);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)cmd_list->IdxBuffer.Size * sizeof(ImDrawIdx), (const GLvoid *)cmd_list->IdxBuffer.Data, GL_STREAM_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)cmd_list->IdxBuffer.Size * sizeof(ImDrawIdx), (const GLvoid*)cmd_list->IdxBuffer.Data, GL_STREAM_DRAW);
 
-			for (int cmd_i = 0; cmd_i < cmd_list->CmdBuffer.Size; cmd_i++)
-			{
-				const ImDrawCmd *pcmd = &cmd_list->CmdBuffer[cmd_i];
-				if (pcmd->UserCallback)
-				{
+			for (int cmd_i = 0; cmd_i < cmd_list->CmdBuffer.Size; cmd_i++) {
+				const ImDrawCmd* pcmd = &cmd_list->CmdBuffer[cmd_i];
+				if (pcmd->UserCallback) {
 					pcmd->UserCallback(cmd_list, pcmd);
 				}
-				else
-				{
+				else {
 					glBindTexture(GL_TEXTURE_2D, (GLuint)(intptr_t)pcmd->TextureId);
 					glScissor((int)pcmd->ClipRect.x, (int)(fb_height - pcmd->ClipRect.w), (int)(pcmd->ClipRect.z - pcmd->ClipRect.x), (int)(pcmd->ClipRect.w - pcmd->ClipRect.y));
 					glDrawElements(GL_TRIANGLES, (GLsizei)pcmd->ElemCount, sizeof(ImDrawIdx) == 2 ? GL_UNSIGNED_SHORT : GL_UNSIGNED_INT, idx_buffer_offset);
