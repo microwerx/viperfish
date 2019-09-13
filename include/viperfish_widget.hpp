@@ -22,6 +22,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <stdexcept>
 #include <fluxions_gte_rect.hpp>
 #include <viperfish_mouse.hpp>
 #include <viperfish_keyboard.hpp>

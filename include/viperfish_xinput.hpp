@@ -22,8 +22,12 @@
 #include <viperfish_gamepad.hpp>
 
 #ifdef _WIN32
+#ifndef NOMINMAX
 #define NOMINMAX
-#define WIN32_LEAN_AND_MEAN
+#endif
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN 1
+#endif
 #include <Windows.h>
 #include <Xinput.h>
 
