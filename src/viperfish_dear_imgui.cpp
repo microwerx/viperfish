@@ -36,8 +36,6 @@ namespace Vf
 	}
 
 	void DearImGuiWidget::OnInit(const std::vector<std::string>& args) {
-		Widget::OnInit(args);
-
 		Hf::Log.infofn(__FUNCTION__, "Creating Dear ImGui Context");
 		pImGuiContext = ImGui::CreateContext();
 		pIO = &ImGui::GetIO();
@@ -75,6 +73,8 @@ namespace Vf
 		pIO->KeyMap[ImGuiKey_Z] = 'z';
 
 		CreateDeviceObjects();
+
+		Widget::OnInit(args);
 	}
 
 	void DearImGuiWidget::OnKill() {
@@ -190,7 +190,7 @@ namespace Vf
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glGenerateMipmap(GL_TEXTURE_2D);
+		//glGenerateMipmap(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		long long id = fontTextureId;
@@ -220,7 +220,10 @@ namespace Vf
 			"{\n"
 			"  gl_FragColor = vColor * texture2D(Texture0, vTexcoord.st);\n"
 			"}\n";
-
+		if (!glCreateProgram) {
+			HFLOGERROR("Unable to call glCreateProgram()! Is this a STATIC/DYNAMIC GLEW issue?");
+			return false;
+		}
 		program = glCreateProgram();
 		vshader = glCreateShader(GL_VERTEX_SHADER);
 		fshader = glCreateShader(GL_FRAGMENT_SHADER);
