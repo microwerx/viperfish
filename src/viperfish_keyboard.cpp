@@ -40,7 +40,7 @@ namespace Vf
 		return vf_keymod;
 	}
 	
-	void KeyboardState::SetKey(unsigned char c, int keymod, bool pressed)
+	void KeyboardState::SetKey(unsigned c, unsigned keymod, bool pressed)
 	{
 		if (keymod & ShiftKeyBit) {
 			c = (unsigned char)toupper(c);
@@ -72,7 +72,7 @@ namespace Vf
 		return count;
 	}
 
-	const char *KeyToHTML5Name(int c)
+	const char *KeyToHTML5Name(unsigned c)
 	{
 		static char s[10];
 
@@ -183,7 +183,7 @@ namespace Vf
 		return 0;
 	}
 
-	const char *SpecialKeyToHTML5Name(int key)
+	const char *SpecialKeyToHTML5Name(unsigned key)
 	{
 		if (key >= 0x100)
 			key -= 0x100;

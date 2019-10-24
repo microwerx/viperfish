@@ -131,7 +131,7 @@ namespace Vf
 			keys[key] = state;
 		}
 
-		void SetKey(unsigned char c, int keymod, bool state);
+		void SetKey(unsigned c, unsigned keymod, bool state);
 
 		inline bool IsPressed(const std::string& key) const
 		{
@@ -152,8 +152,8 @@ namespace Vf
 	int GetKeyboardModifiers();
 	int SetKeyboardModifiers(bool shiftKey, bool ctrlKey, bool altKey, bool metaKey, bool capsLock, bool numLock);
 
-	const char* KeyToHTML5Name(char c);
-	const char* SpecialKeyToHTML5Name(int key);
+	const char* KeyToHTML5Name(unsigned c);
+	const char* SpecialKeyToHTML5Name(unsigned key);
 	int HTML5NameToKey(const std::string& key);
 
 } // namespace Vf
