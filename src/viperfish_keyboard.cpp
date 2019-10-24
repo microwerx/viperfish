@@ -72,7 +72,7 @@ namespace Vf
 		return count;
 	}
 
-	const char *KeyToHTML5Name(char c)
+	const char *KeyToHTML5Name(int c)
 	{
 		static char s[10];
 
