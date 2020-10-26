@@ -80,23 +80,107 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\viperfish.hpp" />
+    <ClInclude Include="include\viperfish_animation_window.hpp" />
+    <ClInclude Include="include\viperfish_animpath_window.hpp" />
+    <ClInclude Include="include\viperfish_base.hpp" />
     <ClInclude Include="include\viperfish_dear_imgui.hpp" />
     <ClInclude Include="include\viperfish_gamepad.hpp" />
     <ClInclude Include="include\viperfish_keyboard.hpp" />
+    <ClInclude Include="include\viperfish_loading_window.hpp" />
     <ClInclude Include="include\viperfish_mouse.hpp" />
-    <ClInclude Include="include\viperfish_opengl.hpp" />
+    <ClInclude Include="include\viperfish_root_window.hpp" />
+    <ClInclude Include="include\viperfish_stats_window.hpp" />
     <ClInclude Include="include\viperfish_utilities.hpp" />
     <ClInclude Include="include\viperfish_widget.hpp" />
+    <ClInclude Include="include\viperfish_window.hpp" />
     <ClInclude Include="include\viperfish_xinput.hpp" />
+    <ClInclude Include="src\viperfish_pch.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\viperfish_analog_bitset.cpp" />
-    <ClCompile Include="src\viperfish_dear_imgui.cpp" />
-    <ClCompile Include="src\viperfish_gamepad.cpp" />
-    <ClCompile Include="src\viperfish_keyboard.cpp" />
-    <ClCompile Include="src\viperfish_mouse.cpp" />
-    <ClCompile Include="src\viperfish_widget.cpp" />
-    <ClCompile Include="src\viperfish_xinput.cpp" />
+    <ClCompile Include="src\viperfish_analog_bitset.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_animation_window.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_animpath_window.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_dear_imgui.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_gamepad.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_keyboard.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_loading_window.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_mouse.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_root_window.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_stats_window.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_widget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_window.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\viperfish_xinput.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">viperfish_pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

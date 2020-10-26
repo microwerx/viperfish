@@ -1,35 +1,14 @@
-// SSPHH/Fluxions/Unicornfish/Viperfish/Hatchetfish/Sunfish/Damselfish/GLUT Extensions
-// Copyright (C) 2017 Jonathan Metzgar
-// All rights reserved.
-//
-// This program is free software : you can redistribute it and/or modify
-// it under the terms of the GNU Affero General Public License as
-// published by the Free Software Foundation, either version 3 of the
-// License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
-// GNU Affero General Public License for more details.
-//
-// You should have received a copy of the GNU Affero General Public License
-// along with this program.If not, see <https://www.gnu.org/licenses/>.
-//
-// For any other type of licensing, please contact me at jmetzgar@outlook.com
-#include <string>
+#include "viperfish_pch.hpp"
 #include <viperfish_keyboard.hpp>
 
-namespace Vf
-{
-	static int vf_keymod = 0;
-	
-	int GetKeyboardModifiers()
-	{
+namespace Vf {
+	int KeyboardState::vf_keymod = 0;
+
+	int KeyboardState::GetKeyboardModifiers() {
 		return vf_keymod;
 	}
 
-	int SetKeyboardModifiers(bool shiftKey, bool ctrlKey, bool altKey, bool metaKey, bool capsLock, bool numLock)
-	{
+	int KeyboardState::SetKeyboardModifiers(bool shiftKey, bool ctrlKey, bool altKey, bool metaKey, bool capsLock, bool numLock) {
 		vf_keymod = 0;
 		vf_keymod |= shiftKey ? VF_SHIFT_MODIFIER : 0;
 		vf_keymod |= ctrlKey ? VF_CTRL_MODIFIER : 0;
@@ -39,9 +18,8 @@ namespace Vf
 		vf_keymod |= numLock ? VF_NUMLOCK_MODIFIER : 0;
 		return vf_keymod;
 	}
-	
-	void KeyboardState::SetKey(unsigned c, unsigned keymod, bool pressed)
-	{
+
+	void KeyboardState::SetKey(unsigned c, unsigned keymod, bool pressed) {
 		if (keymod & ShiftKeyBit) {
 			c = (unsigned char)toupper(c);
 		}
@@ -53,17 +31,15 @@ namespace Vf
 		SetKey(key, pressed);
 	}
 
-	bool KeyboardState::CheckKeyPressed(std::vector<std::string> keysToCheck)
-	{
-		for (auto &key : keysToCheck) {
+	bool KeyboardState::CheckKeyPressed(std::vector<std::string> keysToCheck) {
+		for (auto& key : keysToCheck) {
 			if (IsPressed(key))
 				return true;
 		}
 		return false;
 	}
 
-	int KeyboardState::CountKeysPressed(std::vector<std::string> keysToCheck)
-	{
+	int KeyboardState::CountKeysPressed(std::vector<std::string> keysToCheck) {
 		int count = 0;
 		for (auto key : keysToCheck) {
 			if (IsPressed(key))
@@ -72,8 +48,7 @@ namespace Vf
 		return count;
 	}
 
-	const char *KeyToHTML5Name(unsigned c)
-	{
+	const char* KeyboardState::KeyToHTML5Name(int c) {
 		static char s[10];
 
 		if (c <= 0x20) {
@@ -91,11 +66,11 @@ namespace Vf
 
 		int keymod = GetKeyboardModifiers();
 		if (keymod & VF_SHIFT_MODIFIER) {
-			const char *lowers = "`1234567890-=[]\\;',./";
-			const char *uppers = "~!@#$%^&*()_+{}|:\"<>?";
+			const char* lowers = "`1234567890-=[]\\;',./";
+			const char* uppers = "~!@#$%^&*()_+{}|:\"<>?";
 			c = (char)toupper(c);
-			const char *lc = lowers;
-			const char *uc = uppers;
+			const char* lc = lowers;
+			const char* uc = uppers;
 			while (*lc != 0) {
 				if (c == *lc) {
 					c = *uc;
@@ -108,14 +83,13 @@ namespace Vf
 		else {
 			c = (char)tolower(c);
 		}
-		s[0] = c;
+		s[0] = (char)c;
 		s[1] = 0;
 
 		return s;
 	}
 
-	int HTML5NameToKey(const std::string &key)
-	{
+	int KeyboardState::HTML5NameToKey(const std::string& key) {
 		if (key == "Tab")
 			return 0x09;
 		if (key == "Enter")
@@ -124,8 +98,8 @@ namespace Vf
 			return 0x1B;
 		if (key == " ")
 			return 0x20;
-		if (key.front() <= 0x7f)
-			return tolower(key.front());
+		if (key.size() == 1 && key.front() <= 0x7f)
+			return key.front();// tolower(key.front());
 		if (key == "F1")
 			return VF_KEY_F1;
 		if (key == "F2")
@@ -183,8 +157,7 @@ namespace Vf
 		return 0;
 	}
 
-	const char *SpecialKeyToHTML5Name(unsigned key)
-	{
+	const char* KeyboardState::SpecialKeyToHTML5Name(int key) {
 		if (key >= 0x100)
 			key -= 0x100;
 
