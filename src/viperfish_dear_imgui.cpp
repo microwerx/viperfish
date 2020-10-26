@@ -17,7 +17,7 @@
 //
 // For any other type of licensing, please contact me at jmetzgar@outlook.com
 #include <viperfish_dear_imgui.hpp>
-#include <fluxions_fileio.hpp>
+#include <fluxions_file_path_info.hpp>
 
 namespace Vf
 {
@@ -44,7 +44,7 @@ namespace Vf
 		pIO->DeltaTime = 0.0f;
 
 		FilePathInfo urwdock("resources/fonts/dock-medium.otf");
-		if (urwdock.Exists()) {
+		if (urwdock.exists()) {
 			ImFont* font = pIO->Fonts->AddFontFromFileTTF("resources/fonts/dock-medium.otf", 24.0f);
 			if (!font) {
 				HFLOGWARN("Dock Font cannot to be loaded");
