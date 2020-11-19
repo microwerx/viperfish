@@ -160,24 +160,31 @@ namespace Vf {
 		HFLOGDEBUGFIRSTRUNCOUNT(MAX_RUN_MESSAGES);
 
 		Widget::OnPreRender();
-		if (!program) return;
-		ImGui::NewFrame();
+		//if (!program) return;
+		//ImGui::NewFrame();
 	}
 
 	void DearImGuiWidget::OnPostRender() {
 		HFLOGDEBUGFIRSTRUNCOUNT(MAX_RUN_MESSAGES);
 
 		Widget::OnPostRender();
+	}
+
+
+	void DearImGuiWidget::ImGuiNewFrame() {
 		if (!program) return;
-		ImGui::Render();
-		RenderDrawLists();
+		ImGui::NewFrame();
 	}
 
 	void DearImGuiWidget::OnRenderDearImGui() {
 		HFLOGDEBUGFIRSTRUNCOUNT(MAX_RUN_MESSAGES);
-
-		if (!program) return;
 		Widget::OnRenderDearImGui();
+	}
+
+	void DearImGuiWidget::ImGuiEndFrame() {
+		if (!program) return;
+		ImGui::Render();
+		RenderDrawLists();
 	}
 
 	bool DearImGuiWidget::CreateDeviceObjects() {

@@ -54,8 +54,10 @@ namespace Vf {
 		virtual void OnKeyUp(const std::string& key, int keymod) override;
 
 		virtual void OnPreRender() override;
-		virtual void OnPostRender() override;
+		virtual void ImGuiNewFrame() override;
 		virtual void OnRenderDearImGui() override;
+		virtual void ImGuiEndFrame() override;
+		virtual void OnPostRender() override;
 
 	protected:
 		GLuint fontTextureId = 0;

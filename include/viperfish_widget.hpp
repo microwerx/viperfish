@@ -96,6 +96,7 @@ namespace Vf {
 		inline const Fx::Rectf& windowRect() const { return windowRect_; }
 		inline Fx::Recti windowRecti() const { return (Fx::Recti)windowRect_; }
 		inline Fx::Rectf& windowRect() { return windowRect_; }
+		inline float aspectRatio() const { return (float)windowRect_.x / (float)windowRect_.y; }
 
 		inline bool isVisible() const { return visible_; }
 		inline bool isOrphan() const { return !parent_; }
@@ -154,7 +155,14 @@ namespace Vf {
 		virtual void OnPreRender();
 		virtual void OnRender3D();
 		virtual void OnRender2D();
+
+		// ImGuiNewFrame() must be called once before rendering GUI code.
+		virtual void ImGuiNewFrame() {}
+		// OnRenderDearImGui() is where all the ImGui code should be run.
 		virtual void OnRenderDearImGui();
+		// ImGuiEndFrame() must be called once after rendering GUI code.
+		virtual void ImGuiEndFrame() {}
+
 		virtual void OnPostRender();
 
 		virtual void OnMainLoop();
