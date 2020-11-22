@@ -96,7 +96,7 @@ namespace Vf {
 	inline void ImGuiBoundingBox(const Fx::BoundingBoxf& bbox) {
 		ImGui::Text("Min:  [ % 3.2f % 3.2f % 3.2f ]", bbox.minBounds.x, bbox.minBounds.y, bbox.minBounds.z);
 		ImGui::Text("Max:  [ % 3.2f % 3.2f % 3.2f ]", bbox.maxBounds.x, bbox.maxBounds.y, bbox.maxBounds.z);
-		ImGui::Text("Size: [ %3.2f %3.2f %3.2f ]", bbox.Size().x, bbox.Size().y, bbox.Size().z);
+		ImGui::Text("Size: [ %3.2f %3.2f %3.2f ]", bbox.size().x, bbox.size().y, bbox.size().z);
 	}
 
 	inline void ImGuiAlignAt(float& offset, const char* referencestr = nullptr) {
