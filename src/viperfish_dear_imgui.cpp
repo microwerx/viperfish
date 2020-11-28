@@ -32,9 +32,12 @@ namespace Vf {
 		pIO->DeltaTime = 0.0f;
 
 		std::vector<std::string> fontpaths{
+#ifdef __unix__
 			"ssphh-data/resources/fonts/ibmplexsanscond-medium.otf",
 			"ssphh-data/resources/fonts/dock-medium.otf",
-			"ssphh-data/resources/fonts/inconsolata.otf" };
+			"ssphh-data/resources/fonts/inconsolata.otf"
+#endif
+		};
 		FilePathInfo fontfpi;
 		ImFont* font{ nullptr };
 		for (auto fontpath : fontpaths) {
@@ -199,6 +202,7 @@ namespace Vf {
 			result = false;
 		}
 		else {
+			HFLOGDEBUG("Creating Dear ImGui font texture...");
 			unsigned char* pixels{ nullptr };
 			int w;
 			int h;
@@ -213,7 +217,9 @@ namespace Vf {
 		long long id = fontTextureId;
 		pIO->Fonts->TexID = (ImTextureID)id;
 
-		const GLchar* vertex_shader = "#version 100\n"
+		HFLOGDEBUG("Creating Dear ImGui shader objects...");
+		const GLchar* vertex_shader = ""
+			"#version 100\n"
 			"precision highp float;\n"
 			"uniform mat4 ProjectionMatrix;\n"
 			"attribute vec4 aPosition;\n"
@@ -228,7 +234,8 @@ namespace Vf {
 			"  gl_Position = ProjectionMatrix * vec4(aPosition.xyz,1.0);\n"
 			"}\n";
 
-		const GLchar* fragment_shader = "#version 100\n"
+		const GLchar* fragment_shader = ""
+			"#version 100\n"
 			"precision highp float;\n"
 			"uniform sampler2D Texture0;\n"
 			"varying vec3 vTexcoord;\n"
@@ -299,6 +306,7 @@ namespace Vf {
 			delete[] infoLog;
 		}
 
+		HFLOGDEBUG("Creating Dear ImGui vertex array objects...");
 		uTexture0Loc = glGetUniformLocation(program, "Texture0");
 		uProjectionMatrixLoc = glGetUniformLocation(program, "ProjectionMatrix");
 		aPositionLoc = glGetAttribLocation(program, "aPosition");
