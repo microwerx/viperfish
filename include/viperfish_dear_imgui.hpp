@@ -115,7 +115,7 @@ namespace Vf {
 	}
 
 	inline void ImGuiValue2f(const char* m, const Fx::Vector2f& v) {
-		ImGui::Text(m);
+		ImGui::Text("%s", m);
 		ImGui::SameLine();
 		ImGui::Value("x", v.x);
 		ImGui::SameLine();
@@ -123,7 +123,7 @@ namespace Vf {
 	}
 
 	inline void ImGuiValue3f(const char* m, const Fx::Vector3f& v) {
-		ImGui::Text(m);
+		ImGui::Text("%s", m);
 		ImGui::SameLine();
 		ImGui::Value("x", v.x);
 		ImGui::SameLine();
@@ -134,7 +134,7 @@ namespace Vf {
 
 	inline void ImGuiValue4f(const char* m, const Fx::Vector4f& v) {
 		ImGui::LabelText(m, "% 2.3f % 2.3f % 2.3f %2.3f", v.x, v.y, v.z, v.w);
-		//ImGui::Text(m);
+		//ImGui::Text("%s", m);
 		//ImGui::SameLine();
 		//ImGui::Value("x", v.x);
 		//ImGui::SameLine();
@@ -146,7 +146,7 @@ namespace Vf {
 	}
 
 	inline void ImGuiValue3f(const char* m, const Fx::Color3f& v) {
-		ImGui::Text(m);
+		ImGui::Text("%s", m);
 		ImGui::SameLine();
 		ImGui::Value("r", v.r);
 		ImGui::SameLine();
@@ -156,7 +156,7 @@ namespace Vf {
 	}
 
 	inline void ImGuiValue4f(const char* m, const Fx::Color4f& v) {
-		ImGui::Text(m);
+		ImGui::Text("%s", m);
 		ImGui::SameLine();
 		ImGui::Value("r", v.r);
 		ImGui::SameLine();
@@ -168,7 +168,7 @@ namespace Vf {
 	}
 
 	inline void ImGuiValueQuaternion(const char* m, const Fx::Quaternionf& q) {
-		ImGui::Text(m);
+		ImGui::Text("%s", m);
 		ImGui::SameLine();
 		ImGui::Value("a", q.a);
 		ImGui::SameLine();
