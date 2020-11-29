@@ -62,10 +62,10 @@ namespace Vf {
 		inline const value_type* data() const noexcept { if (leaf_) return nullptr; return children_.data(); }
 
 		// Properties
-		inline const SharedPtr& decoratee() const noexcept { return decoratorWidget_; }
-		inline SharedPtr& decoratee() noexcept { return decoratorWidget_; }
-		inline const SharedPtr& decorator() const noexcept { return decorateeWidget_; }
-		inline SharedPtr& decorator() noexcept { return decorateeWidget_; }
+		inline const SharedPtr& decoratee() const noexcept { return decorateeWidget_; }
+		inline SharedPtr& decoratee() noexcept { return decorateeWidget_; }
+		inline const SharedPtr& decorator() const noexcept { return decoratorWidget_; }
+		inline SharedPtr& decorator() noexcept { return decoratorWidget_; }
 		inline const SharedPtr& parent() const noexcept { return parent_; }
 		inline SharedPtr& parent() noexcept { return parent_; }
 
@@ -157,11 +157,19 @@ namespace Vf {
 		virtual void OnRender2D();
 
 		// ImGuiNewFrame() must be called once before rendering GUI code.
-		virtual void ImGuiNewFrame() {}
+		virtual void ImGuiNewFrame() {
+            if (decorator())
+                decorator()->ImGuiNewFrame();
+        }
+        
 		// OnRenderDearImGui() is where all the ImGui code should be run.
 		virtual void OnRenderDearImGui();
-		// ImGuiEndFrame() must be called once after rendering GUI code.
-		virtual void ImGuiEndFrame() {}
+		
+        // ImGuiEndFrame() must be called once after rendering GUI code.
+		virtual void ImGuiEndFrame() {
+            if (decorator())
+                decorator()->ImGuiEndFrame();
+        }
 
 		virtual void OnPostRender();
 
