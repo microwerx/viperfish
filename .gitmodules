@@ -1,6 +1,3 @@
-[submodule "imgui"]
-	path = imgui
-	url = https://github.com/ocornut/imgui
 [submodule "fluxions-gte"]
 	path = fluxions-gte
 	url = https://github.com/microwerx/fluxions-gte
