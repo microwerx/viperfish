@@ -37,3 +37,5 @@ endif()
 find_package(GLEW REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE GLEW::GLEW)
 
+find_package(imgui CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE imgui::imgui)
