@@ -173,7 +173,6 @@ namespace Vf {
 		Widget::OnPostRender();
 	}
 
-
 	void DearImGuiWidget::ImGuiNewFrame() {
 		if (!program) return;
 		ImGui::NewFrame();
@@ -204,8 +203,8 @@ namespace Vf {
 		else {
 			HFLOGDEBUG("Creating Dear ImGui font texture...");
 			unsigned char* pixels{ nullptr };
-			int w;
-			int h;
+            int w{0};
+            int h{0};
 			pIO->Fonts->GetTexDataAsRGBA32(&pixels, &w, &h);
 			glBindTexture(GL_TEXTURE_2D, fontTextureId);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);

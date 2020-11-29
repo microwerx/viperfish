@@ -13,7 +13,7 @@ namespace Vf {
 
 	void RootWindow::OnRenderDearImGui() {
 		HFLOGDEBUGFIRSTRUNCOUNT(MAX_RUN_MESSAGES);
-		Widget::OnRenderDearImGui();
+        Widget::OnRenderDearImGui();
 	}
 
 } // namespace Vf
